@@ -49,7 +49,7 @@ export default {
 
     onMounted(() => {
       let newSocket = new WebSocket(
-        "ws://" + window.location.hostname + ":3000/ws"
+        "ws://" + window.location.hostname + ":3000/ws?address=testing"
       );
       console.log("Attempting WebSocket Connection");
 

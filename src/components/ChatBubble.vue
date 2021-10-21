@@ -4,7 +4,7 @@
       <p v-if="!isSelf">{{ chat.address }}</p>
       <div class="bubble-content" :class="{ 'mt-2': !isSelf }">
         <p>{{ chat.message }}</p>
-        <p class="text-sm text-gray-600 ml-2">{{ chat.displayTime }}</p>
+        <p class="text-sm text-gray-600 ml-2">{{ messageTime }}</p>
       </div>
     </div>
   </div>
@@ -14,6 +14,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
+  name: "Chat Bubble",
   props: {
     chat: Object,
   },
@@ -21,6 +22,11 @@ export default {
     const store = useStore();
 
     const isSelf = computed(() => props.chat.address == store.state.address);
+
+    const messageTime = computed(() => {
+      let currentDate = new Date();
+      return `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+    });
 
     const rowClass = computed(() => {
       return {
@@ -40,6 +46,7 @@ export default {
       rowClass,
       isSelf,
       bubbleClass,
+      messageTime,
     };
   },
 };
